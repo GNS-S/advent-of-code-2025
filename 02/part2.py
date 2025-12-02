@@ -11,7 +11,6 @@ def main():
             for i in range(1, len(s) // 2 + 1):
                 repeats = len(s) // i
                 if s[:i] * repeats == s:
-                    if num not in ans: print(num)
                     ans.add(num)
             
     print(sum(ans))
