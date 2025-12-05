@@ -15,10 +15,7 @@ def main():
             new_e = max(e1, e2)
             merged[-1] = (new_s, new_e)
 
-    ans = 0
-    for s,  e in merged:
-        ans += e - s + 1
-
+    ans = sum([e - s + 1 for s, e in merged])
     print(ans)
 
 if __name__ == '__main__':
