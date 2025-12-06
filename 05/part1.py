@@ -15,7 +15,8 @@ def main():
 
     print(ans)
 
-def parse_input() -> list[list[str]]:
+def parse_input() -> tuple[list[tuple[int]], list[int]]:
+
     with open(INPUT_PATH) as f:
         range_lines, ingredient_lines = f.read().strip().split('\n\n')
 
