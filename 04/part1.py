@@ -14,7 +14,7 @@ def main():
                    
     print(ans)
 
-def can_remove(grid: list[list[str]], r: int, c: int):
+def can_remove(grid: list[list[str]], r: int, c: int) -> bool:
     max_r = len(grid) - 1
     max_c = len(grid[0]) - 1
     directions = [
