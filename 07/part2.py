@@ -1,22 +1,19 @@
 from part1 import parse_input
-from functools import cache
+from collections import defaultdict
 
 def main():
-    grid = parse_input()
-    final_row_index = len(grid) - 1
-    start_r = 0
-    start_c = grid[start_r].index('S')
+    start_col, grid = parse_input()
+    beams = defaultdict(int)
+    beams[start_col] = 1
 
-    @cache
-    def beam(row: int, col: int):
-        if row == final_row_index:
-            return 1
-        if grid[row][col] == '^':
-            return beam(row, col - 1) + beam(row, col + 1)
-        
-        return beam(row + 1, col)
+    for row in grid:
+        for c, tile in enumerate(row):
+            if tile == '^' and c in beams:
+                beams[c - 1] += beams[c]
+                beams[c + 1] += beams[c]
+                del beams[c]
 
-    print(beam(start_r, start_c))
+    print(sum(beams.values()))
 
 if __name__ == '__main__':
     main()
