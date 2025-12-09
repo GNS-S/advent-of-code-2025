@@ -1,4 +1,5 @@
 from os import path
+from itertools import combinations
 
 INPUT_DIR = path.dirname(path.realpath(__file__))
 INPUT_PATH = f'{INPUT_DIR}/input.txt'
@@ -7,10 +8,9 @@ def main():
     coords = parse_input()
 
     ans = 0
-    for i in range(len(coords)):
-        for j in range(i, len(coords)):
-            area = square_area(coords[i], coords[j])
-            ans = max(ans, area)
+    for a, b in combinations(coords, 2):
+        area = rectangle_area(a, b)
+        ans = max(ans, area)
 
     print(ans)
 
@@ -25,7 +25,7 @@ def parse_input() -> tuple[int, list[list[str]]]:
 
         return coords
     
-def square_area(a: tuple[int, int], b: tuple[int, int]) -> int:
+def rectangle_area(a: tuple[int, int], b: tuple[int, int]) -> int:
     x, y = a
     x2, y2 = b
     return (abs(x2 - x) + 1) * (abs(y2 - y) + 1)
