@@ -1,6 +1,5 @@
-from heapq import heappop, heappush
+from heapq import heappop
 from part1 import distance_heap, parse_input
-from collections import defaultdict
 
 def main():
     boxes = parse_input()

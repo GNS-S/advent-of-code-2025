@@ -28,7 +28,7 @@ def main():
     lengths = sorted([len(chain) for chain in chains])
     print(prod(lengths[-3:]))
 
-def parse_input() -> tuple[int, list[list[str]]]:
+def parse_input() -> list[tuple[int, int,int]]:
     with open(INPUT_PATH) as f:
         lines = f.read().strip().split('\n')
 

@@ -14,7 +14,7 @@ def main():
 
     print(ans)
 
-def parse_input() -> tuple[int, list[list[str]]]:
+def parse_input() -> list[tuple[int, int]]:
     with open(INPUT_PATH) as f:
         lines = f.read().strip().split('\n')
 
