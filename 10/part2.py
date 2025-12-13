@@ -128,7 +128,6 @@ def bounded_combinations(bounds: list[int]) -> list[tuple]:
     Return list of positive integer combinations such that for every combination:
     combination[i] <= bounds[i]
     '''
-
     combinations: list[tuple] = []
     Q = [tuple()]
     while Q:
