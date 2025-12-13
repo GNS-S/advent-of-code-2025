@@ -33,19 +33,19 @@ def main():
 def parse_input() -> list[tuple[tuple, tuple, tuple]]:
     with open(INPUT_PATH) as f:
         lines = f.read().strip().split('\n')
-        diagrams = []
+        machines = []
         for line in lines:
             chunks = line.split()
             indicator = tuple(True if c == '#' else False for c in chunks[0][1:-1])
-            joltage = tuple(int(c) for c in chunks[-1][1:-1].split(','))
+            joltages = tuple(int(c) for c in chunks[-1][1:-1].split(','))
 
             buttons = []
             for chunk in chunks[1:-1]:
                 buttons.append(tuple(int(c) for c in chunk[1:-1].split(',')))
 
-            diagrams.append((indicator, buttons, joltage))
+            machines.append((indicator, buttons, joltages))
 
-        return diagrams
+        return machines
 
 if __name__ == '__main__':
     main()
