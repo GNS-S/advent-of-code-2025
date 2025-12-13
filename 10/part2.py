@@ -34,7 +34,7 @@ def main():
         fvar_count = col_count - row_count
         fvar_combs = bounded_combinations(bounds[-fvar_count:]) if fvar_count > 0 else [[]]
 
-        def _sum_xs(fvars: list[int]) -> list[int]:
+        def _sum_pivot_xs(fvars: list[int]) -> list[int]:
             x_sum = 0
             for r in range(row_count):
                 fvar_sum = 0
@@ -55,7 +55,7 @@ def main():
           
         min_sum = inf
         for comb in fvar_combs:
-            min_sum = min(min_sum, _sum_xs(comb) + sum(comb))
+            min_sum = min(min_sum, _sum_pivot_xs(comb) + sum(comb))
 
         ans += min_sum
 
