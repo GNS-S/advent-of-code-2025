@@ -34,28 +34,9 @@ def main():
         fvar_count = col_count - row_count
         fvar_combs = bounded_combinations(bounds[-fvar_count:]) if fvar_count > 0 else [[]]
 
-        def _sum_pivot_xs(fvars: list[int]) -> list[int]:
-            x_sum = 0
-            for r in range(row_count):
-                fvar_sum = 0
-                for i in range(len(comb)):
-                    fvar_sum += fvars[i] * A[r][col_count - fvar_count + i]
-
-                rhs = b[r] - fvar_sum
-                x = rhs / A[r][r]
-
-                # Non-integer and negative solutions are invalid
-                if not x.is_integer() or x < 0:
-                    x_sum = inf
-                    break
-
-                x_sum += int(x)
-
-            return x_sum
-          
         min_sum = inf
-        for comb in fvar_combs:
-            min_sum = min(min_sum, _sum_pivot_xs(comb) + sum(comb))
+        for fvars in fvar_combs:
+            min_sum = min(min_sum, solve_sum(A, b, fvars) + sum(fvars))
 
         ans += min_sum
 
@@ -140,6 +121,36 @@ def bounded_combinations(bounds: list[int]) -> list[tuple]:
             Q.append((*sofar, i))
 
     return combinations
+
+def solve_sum(A: list[list[int]], b: list[int], fvars: list[int]):
+    '''
+    Solves for sum of xs for Ax = b. Return inf for impossible xs
+    
+    :param A: matrix in RREF, populated diagonal and all free variables in column indices > rank(A)
+    :param b: rhs column vector
+    :param fvars: free variables to substitute
+    '''
+    row_count = len(A)
+    col_count = len(A[0])
+    fvar_count = col_count - row_count
+
+    x_sum = 0
+    for r in range(row_count):
+        fvar_sum = 0
+        for i in range(fvar_count):
+            fvar_sum += fvars[i] * A[r][col_count - fvar_count + i]
+
+        rhs = b[r] - fvar_sum
+        x = rhs / A[r][r]
+
+        # Non-integer and negative solutions are invalid
+        if not x.is_integer() or x < 0:
+            x_sum = inf
+            break
+
+        x_sum += int(x)
+
+    return x_sum
 
 if __name__ == '__main__':
     main()
