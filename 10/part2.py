@@ -18,9 +18,9 @@ def main():
         A = [[1 if i in button else 0 for button in buttons] for i in range(len(joltages))]
         b = list(joltages)
 
-        # Reduce A and b to RREF while also swapping columns to ensure that the diagonal is fully
-        # populated and all free variables (if there's any) lie in columns to the right of the last
-        # value of the diagonal (col index > matrix rank - 1)
+        # Reduce A and b to RREF and swap columns to ensure that the diagonal is fully populated and
+        # all free variables (if there's any) lie in columns to the right of the last value of the
+        # diagonal (col index > matrix rank - 1)
         #
         # Also take note of the the new column (button) order after swaps
         A, b, col_order = permuted_rref(A, b)
@@ -145,8 +145,7 @@ def solve_sum(A: list[list[int]], b: list[int], fvars: list[int]):
 
         # Non-integer and negative solutions are invalid
         if not x.is_integer() or x < 0:
-            x_sum = inf
-            break
+            return inf
 
         x_sum += int(x)
 
