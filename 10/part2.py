@@ -126,7 +126,7 @@ def solve_sum(A: list[list[int]], b: list[int], fvars: list[int]):
     '''
     Solves for sum of xs for Ax = b. Return inf for impossible xs
     
-    :param A: matrix in RREF, populated diagonal and all free variables in column indices > rank(A)
+    :param A: matrix in RREF, populated diagonal and free variables in column indices > rank(A) - 1
     :param b: rhs column vector
     :param fvars: free variables to substitute
     '''
